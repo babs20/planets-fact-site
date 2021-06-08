@@ -4,7 +4,7 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     main: {
       colors: {
-        white: string;
+        mainText: string;
         'blue-900': string;
         'blue-500': string;
         'blue-100': string;
@@ -23,6 +23,10 @@ declare module 'styled-components' {
         'text-h3': readonly SimpleInterpolation[];
         'text-h4': readonly SimpleInterpolation[];
         'text-body': readonly SimpleInterpolation[];
+      };
+      fonts: {
+        spartan: string;
+        antonio: string;
       };
     };
   }
