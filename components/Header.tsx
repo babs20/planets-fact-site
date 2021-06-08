@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 
 const Navigation = styled.div`
   display: flex;
@@ -23,8 +24,9 @@ const PlanetCircle = styled.div<{ bgColor: string }>`
   margin-right: 24px;
 `;
 
-const Menu = styled.ul`
+const Menu = styled.ul<{ isOpen: boolean }>`
   padding: 24px 24px;
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
 `;
 
 const MenuItem = styled.li`
@@ -54,7 +56,13 @@ const ChevronContainer = styled.svg`
   margin-right: 8px;
 `;
 
-const HamburgerIcon = (): JSX.Element => {
+const HamburgerIcon = ({
+  setIsOpen,
+  isOpen,
+}: {
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isOpen: boolean;
+}): JSX.Element => {
   return (
     <svg
       width='36'
@@ -62,6 +70,7 @@ const HamburgerIcon = (): JSX.Element => {
       viewBox='0 0 36 36'
       fill='none'
       xmlns='http://www.w3.org/2000/svg'
+      onClick={() => setIsOpen(!isOpen)}
     >
       <rect x='6' y='9.5' width='24' height='3' fill='white' />
       <rect x='6' y='16.5' width='24' height='3' fill='white' />
@@ -79,69 +88,61 @@ const Chevron = (): JSX.Element => {
 };
 
 export default function Header(): JSX.Element {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const planets = [
+    {
+      name: 'Mercury',
+      color: '#DEF4FC',
+    },
+    {
+      name: 'Venus',
+      color: '#F7CC7F',
+    },
+    {
+      name: 'Earth',
+      color: '#545BFE',
+    },
+    {
+      name: 'Mars',
+      color: '#FF6A45',
+    },
+    {
+      name: 'Jupiter',
+      color: '#ECAD7A',
+    },
+    {
+      name: 'Saturn',
+      color: '#FCCB6B',
+    },
+    {
+      name: 'Uranus',
+      color: '#65F0D5',
+    },
+    {
+      name: 'Neptune',
+      color: '#497EFA',
+    },
+  ];
+
   return (
     <header>
       <Navigation>
         <SiteName>THE PLANETS</SiteName>
-        <HamburgerIcon />
+        <HamburgerIcon setIsOpen={setIsOpen} isOpen={isOpen} />
       </Navigation>
-      <Menu>
-        <MenuItem>
-          <PlanetNameContainer>
-            <PlanetCircle bgColor={'#DEF4FC'} />
-            Mercury
-          </PlanetNameContainer>
-          <Chevron />
-        </MenuItem>
-        <MenuItem>
-          <PlanetNameContainer>
-            <PlanetCircle bgColor={'#F7CC7F'} />
-            Venus
-          </PlanetNameContainer>
-          <Chevron />
-        </MenuItem>
-        <MenuItem>
-          <PlanetNameContainer>
-            <PlanetCircle bgColor={'#545BFE'} />
-            Earth
-          </PlanetNameContainer>
-          <Chevron />
-        </MenuItem>
-        <MenuItem>
-          <PlanetNameContainer>
-            <PlanetCircle bgColor={'#FF6A45'} />
-            Mars
-          </PlanetNameContainer>
-          <Chevron />
-        </MenuItem>
-        <MenuItem>
-          <PlanetNameContainer>
-            <PlanetCircle bgColor={'#ECAD7A'} />
-            Jupiter
-          </PlanetNameContainer>
-          <Chevron />
-        </MenuItem>
-        <MenuItem>
-          <PlanetNameContainer>
-            <PlanetCircle bgColor={'#FCCB6B'} />
-            Saturn
-          </PlanetNameContainer>
-          <Chevron />
-        </MenuItem>
-        <MenuItem>
-          <PlanetNameContainer>
-            <PlanetCircle bgColor={'#65F0D5'} />
-            Uranus
-          </PlanetNameContainer>
-          <Chevron />
-        </MenuItem>
-        <MenuItem>
-          <PlanetNameContainer>
-            <PlanetCircle bgColor={'#497EFA'} />
-            Neptune
-          </PlanetNameContainer>
-          <Chevron />
-        </MenuItem>
+      <Menu isOpen={isOpen}>
+        {planets.map(planet => {
+          return (
+            <MenuItem>
+              <PlanetNameContainer>
+                <PlanetCircle bgColor={planet.color} />
+                {planet.name}
+              </PlanetNameContainer>
+              <Chevron />
+            </MenuItem>
+          );
+        })}
       </Menu>
     </header>
   );
