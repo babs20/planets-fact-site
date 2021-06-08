@@ -32,6 +32,9 @@ html {
 	tab-size: 4; /* 3 */
 	-webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+	background-image: url('./img/background-stars.svg');
+	background-color: #070724;
+	background-size: cover;
 }
 
 /*
