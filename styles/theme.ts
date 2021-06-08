@@ -11,7 +11,7 @@ const fonts = {
 const mainTheme: DefaultTheme = {
   main: {
     colors: {
-      white: '#fff',
+      mainText: '#fff',
       'blue-900': '#070724',
       'blue-500': '#38384F',
       'blue-100': '#838391',
@@ -21,8 +21,8 @@ const mainTheme: DefaultTheme = {
       mars: '#D14C32',
       jupiter: '#D83A34',
       saturn: '#CD5120',
-      neptune: '#1EC2A4',
-      uranus: '#2D68F0',
+      uranus: '#1EC2A4',
+      neptune: '#2D68F0',
     },
     typography: {
       'text-h1': css`
@@ -66,6 +66,12 @@ const mainTheme: DefaultTheme = {
         font-size: 14px;
         line-height: 25px;
       `,
+    },
+    fonts: {
+      antonio:
+        "'Antonio', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
+      spartan:
+        "'Spartan', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
     },
   },
 };
