@@ -50,7 +50,16 @@ body {
 	background-image: url('./img/background-stars.svg');
 	background-color: #070724;
 	background-size: fill;
-	
+	font-family:
+		system-ui,
+		-apple-system, /* Firefox supports this but not yet 'system-ui' */
+		'Segoe UI',
+		Roboto,
+		Helvetica,
+		Arial,
+		sans-serif,
+		'Apple Color Emoji',
+		'Segoe UI Emoji'; /* 2 */
 }
 
 /*
