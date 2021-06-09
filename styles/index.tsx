@@ -353,6 +353,6 @@ button:focus {
 }
 
 .menu-open {
-	background-image: none;
+	overflow: hidden;
 }
 `;

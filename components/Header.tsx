@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const Navigation = styled.div`
   position: relative;
@@ -29,6 +29,7 @@ const Menu = styled.ul<{ isOpen: boolean }>`
   position: absolute;
   z-index: 1;
   width: 100%;
+  height: 100%;
   overflow-y: hidden;
   padding: 24px 24px;
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
@@ -95,6 +96,14 @@ const Chevron = (): JSX.Element => {
 
 export default function Header(): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (isOpen) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
+  }, [isOpen]);
 
   const planets = [
     {
