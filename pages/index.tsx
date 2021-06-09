@@ -1,11 +1,13 @@
-import styled, { ThemeProvider } from 'styled-components';
-import { mainTheme } from '../styles/theme';
 import Header from '../components/Header';
+import SectionMenu from '../components/SectionMenu';
 
 export default function Home() {
   return (
-    <ThemeProvider theme={mainTheme}>
+    <>
       <Header />
-    </ThemeProvider>
+      <main>
+        <SectionMenu />
+      </main>
+    </>
   );
 }

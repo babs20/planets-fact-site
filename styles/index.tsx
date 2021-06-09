@@ -32,9 +32,7 @@ html {
 	tab-size: 4; /* 3 */
 	-webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-	background-image: url('./img/background-stars.svg');
-	background-color: #070724;
-	background-size: cover;
+	
 }
 
 /*
@@ -49,19 +47,10 @@ Sections
 
 body {
 	margin: 0; /* 1 */
-	font-family:
-	'Ubuntu',
-		system-ui,
-		-apple-system, /* Firefox supports this but not yet 'system-ui' */
-		'Segoe UI',
-		Roboto,
-		Helvetica,
-		Arial,
-		sans-serif,
-		'Apple Color Emoji',
-		'Segoe UI Emoji'; /* 2 */
+	background-image: url('./img/background-stars.svg');
+	background-color: #070724;
+	background-size: fill;
 	
-
 }
 
 /*
@@ -352,5 +341,9 @@ object {
 button:focus {
   outline: 1px dotted;
   outline: 5px auto -webkit-focus-ring-color;
+}
+
+.menu-open {
+	background-image: none;
 }
 `;
