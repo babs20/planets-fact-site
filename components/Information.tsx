@@ -2,17 +2,21 @@ import styled from 'styled-components';
 
 const InfoSection = styled.section`
   color: ${props => props.theme.main.colors.mainText};
+  text-align: center;
+  margin-bottom: 28px;
 `;
 
 const PlanetName = styled.h1`
   ${props => props.theme.main.typography['text-h2']};
   letter-spacing: normal;
+  margin-bottom: 16px;
 `;
 
 const PlanetCopy = styled.p`
   ${props => props.theme.main.typography['text-body']};
   font-size: 11px;
   line-height: 22px;
+  margin-bottom: 32px;
 `;
 
 const Cite = styled.cite`
