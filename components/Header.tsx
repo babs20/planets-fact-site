@@ -140,7 +140,7 @@ export default function Header(): JSX.Element {
       <Menu isOpen={isOpen}>
         {planets.map(planet => {
           return (
-            <MenuItem>
+            <MenuItem key={planet.name}>
               <PlanetNameContainer>
                 <PlanetCircle bgColor={planet.color} />
                 {planet.name}
