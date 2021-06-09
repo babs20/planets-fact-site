@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { useState } from 'react';
 
 const Navigation = styled.div`
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -25,8 +26,13 @@ const PlanetCircle = styled.div<{ bgColor: string }>`
 `;
 
 const Menu = styled.ul<{ isOpen: boolean }>`
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  overflow-y: hidden;
   padding: 24px 24px;
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+  background-color: ${props => props.theme.main.colors['blue-900']};
 `;
 
 const MenuItem = styled.li`
