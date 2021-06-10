@@ -42,21 +42,26 @@ const SourceSVG = styled.svg`
 `;
 
 export const Information = ({
-  content,
+  section,
   name,
-  source,
 }: {
-  content: string;
+  section: {
+    content: string;
+    source: string;
+  };
   name: string;
-  source: string;
 }): JSX.Element => {
   return (
     <InfoSection>
       <PlanetName>{name}</PlanetName>
-      <PlanetCopy>{content}</PlanetCopy>
+      <PlanetCopy>{section.content}</PlanetCopy>
       <Cite>
         Source:{' '}
-        <InfoLink href={source} rel='noopener noreferrer' target='_blank'>
+        <InfoLink
+          href={section.source}
+          rel='noopener noreferrer'
+          target='_blank'
+        >
           Wikipedia
           <SourceSVG xmlns='http://www.w3.org/2000/svg' width='12' height='12'>
             <path
