@@ -35,6 +35,13 @@ interface PropTypes {
   }[];
 }
 
+type PlanetType = {
+  overview: {
+    content: string;
+    source: string;
+  };
+};
+
 const PlanetContainer = styled.main`
   display: flex;
   flex-direction: column;
@@ -45,17 +52,20 @@ const PlanetContainer = styled.main`
 
 export default function Home({ data }: PropTypes) {
   const [planetPage, setPlanetPage] = useState<number>(0);
+  const [section, setSection] = useState<string>('overview');
 
   return (
     <>
       <Header setPlanetPage={setPlanetPage} />
       <main>
-        <SectionMenu />
+        <SectionMenu sectionName={section} setSection={setSection} />
         <PlanetContainer>
-          <Planet planetImageUrl={data[planetPage].images.planet} />
+          <Planet
+            planetImageUrl={data[planetPage].images.planet}
+            planetName={data[planetPage].name}
+          />
           <Information
-            content={data[planetPage].overview.content}
-            source={data[planetPage].overview.source}
+            section={data[planetPage][section as keyof PlanetType]}
             name={data[planetPage].name}
           />
           <Facts
