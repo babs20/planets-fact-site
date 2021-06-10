@@ -32,24 +32,34 @@ const DefinitionContainer = styled.div`
   margin-bottom: 8px;
 `;
 
-export const Facts = (): JSX.Element => {
+export const Facts = ({
+  rotation,
+  revolution,
+  radius,
+  temperature,
+}: {
+  rotation: string;
+  revolution: string;
+  radius: string;
+  temperature: string;
+}): JSX.Element => {
   return (
     <FactSection>
       <DefinitionContainer>
         <Term>Rotation Time</Term>
-        <Definition>58.6 Days</Definition>
+        <Definition>{rotation}</Definition>
       </DefinitionContainer>
       <DefinitionContainer>
         <Term>Revolution Time</Term>
-        <Definition>89.97 Days</Definition>
+        <Definition>{revolution}</Definition>
       </DefinitionContainer>
       <DefinitionContainer>
         <Term>Radius</Term>
-        <Definition>2,439.7 km</Definition>
+        <Definition>{radius}</Definition>
       </DefinitionContainer>
       <DefinitionContainer>
         <Term>Average Temp.</Term>
-        <Definition>430°c</Definition>
+        <Definition>{temperature}</Definition>
       </DefinitionContainer>
     </FactSection>
   );

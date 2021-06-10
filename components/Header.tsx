@@ -94,7 +94,11 @@ const Chevron = (): JSX.Element => {
   );
 };
 
-export default function Header(): JSX.Element {
+export default function Header({
+  setPlanetPage,
+}: {
+  setPlanetPage: React.Dispatch<React.SetStateAction<number>>;
+}): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
   useEffect(() => {
@@ -147,9 +151,15 @@ export default function Header(): JSX.Element {
         <HamburgerIcon setIsOpen={setIsOpen} isOpen={isOpen} />
       </Navigation>
       <Menu isOpen={isOpen}>
-        {planets.map(planet => {
+        {planets.map((planet, index) => {
           return (
-            <MenuItem key={planet.name}>
+            <MenuItem
+              key={planet.name}
+              onClick={() => {
+                setPlanetPage(index);
+                setIsOpen(false);
+              }}
+            >
               <PlanetNameContainer>
                 <PlanetCircle bgColor={planet.color} />
                 {planet.name}

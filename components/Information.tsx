@@ -41,23 +41,22 @@ const SourceSVG = styled.svg`
   margin: 0 0 1px 4px;
 `;
 
-export const Information = (): JSX.Element => {
+export const Information = ({
+  content,
+  name,
+  source,
+}: {
+  content: string;
+  name: string;
+  source: string;
+}): JSX.Element => {
   return (
     <InfoSection>
-      <PlanetName>Mercury</PlanetName>
-      <PlanetCopy>
-        Mercury is the smallest planet in the Solar System and the closest to
-        the Sun. Its orbit around the Sun takes 87.97 Earth days, the shortest
-        of all the Sun's planets. Mercury is one of four terrestrial planets in
-        the Solar System, and is a rocky body like Earth.
-      </PlanetCopy>
+      <PlanetName>{name}</PlanetName>
+      <PlanetCopy>{content}</PlanetCopy>
       <Cite>
         Source:{' '}
-        <InfoLink
-          href='https://en.wikipedia.org/wiki/Mercury_(planet)'
-          rel='noopener noreferrer'
-          target='_blank'
-        >
+        <InfoLink href={source} rel='noopener noreferrer' target='_blank'>
           Wikipedia
           <SourceSVG xmlns='http://www.w3.org/2000/svg' width='12' height='12'>
             <path
