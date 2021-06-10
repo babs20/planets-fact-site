@@ -73,6 +73,88 @@ const mainTheme: DefaultTheme = {
       spartan:
         "'Spartan', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif",
     },
+    planetDimensions: {
+      mercury: {
+        mobile: css`
+          height: 111px;
+          width: 111px;
+        `,
+        desktop: css`
+          height: 184px;
+          width: 184px;
+        `,
+      },
+      venus: {
+        mobile: css`
+          height: 154px;
+          width: 154px;
+        `,
+        desktop: css`
+          height: 253px;
+          width: 253px;
+        `,
+      },
+      earth: {
+        mobile: css`
+          height: 173px;
+          width: 173px;
+        `,
+        desktop: css`
+          height: 285px;
+          width: 285px;
+        `,
+      },
+      mars: {
+        mobile: css`
+          height: 129px;
+          width: 129px;
+        `,
+        desktop: css`
+          height: 213px;
+          width: 213px;
+        `,
+      },
+      jupiter: {
+        mobile: css`
+          height: 224px;
+          width: 224px;
+        `,
+        desktop: css`
+          height: 369px;
+          width: 369px;
+        `,
+      },
+      saturn: {
+        mobile: css`
+          height: 256px;
+          width: 256px;
+        `,
+        desktop: css`
+          height: 422px;
+          width: 422px;
+        `,
+      },
+      uranus: {
+        mobile: css`
+          height: 176px;
+          width: 176px;
+        `,
+        desktop: css`
+          height: 290px;
+          width: 290px;
+        `,
+      },
+      neptune: {
+        mobile: css`
+          height: 173px;
+          width: 173px;
+        `,
+        desktop: css`
+          height: 285px;
+          width: 285px;
+        `,
+      },
+    },
   },
 };
 

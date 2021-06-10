@@ -13,6 +13,7 @@ const Term = styled.dt`
   letter-spacing: 0.73px;
   text-transform: uppercase;
   opacity: 0.5;
+  margin-top: 4px;
 `;
 const Definition = styled.dd`
   font-family: ${props => props.theme.main.fonts.antonio};

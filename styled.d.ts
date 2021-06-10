@@ -28,6 +28,40 @@ declare module 'styled-components' {
         spartan: string;
         antonio: string;
       };
+      planetDimensions: {
+        mercury: {
+          mobile: readonly SimpleInterpolation[];
+          desktop: readonly SimpleInterpolation[];
+        };
+        venus: {
+          mobile: readonly SimpleInterpolation[];
+          desktop: readonly SimpleInterpolation[];
+        };
+        earth: {
+          mobile: readonly SimpleInterpolation[];
+          desktop: readonly SimpleInterpolation[];
+        };
+        mars: {
+          mobile: readonly SimpleInterpolation[];
+          desktop: readonly SimpleInterpolation[];
+        };
+        jupiter: {
+          mobile: readonly SimpleInterpolation[];
+          desktop: readonly SimpleInterpolation[];
+        };
+        saturn: {
+          mobile: readonly SimpleInterpolation[];
+          desktop: readonly SimpleInterpolation[];
+        };
+        uranus: {
+          mobile: readonly SimpleInterpolation[];
+          desktop: readonly SimpleInterpolation[];
+        };
+        neptune: {
+          mobile: readonly SimpleInterpolation[];
+          desktop: readonly SimpleInterpolation[];
+        };
+      };
     };
   }
 }
