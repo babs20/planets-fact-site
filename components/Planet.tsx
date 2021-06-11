@@ -27,6 +27,7 @@ const PlanetImage = styled.div<PlanetImageProps>`
 `;
 
 const PlanetContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -34,18 +35,60 @@ const PlanetContainer = styled.div`
   width: 100%;
 `;
 
+const HoverIcon = styled.div<{ hoverImageUrl: string; isShown: boolean }>`
+  display: ${({ isShown }) => (isShown ? 'block' : 'none')};
+  position: absolute;
+  background-image: url(${({ hoverImageUrl }) => hoverImageUrl});
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100px;
+  height: 122px;
+  top: 144px;
+`;
+
 export const Planet = ({
   planetImageUrl,
   planetName,
+  sectionName,
 }: {
-  planetImageUrl: string;
+  planetImageUrl: {
+    planet: string;
+    internal: string;
+    geology: string;
+  };
   planetName: string;
+  sectionName: string;
 }): JSX.Element => {
+  type PlanetUrlType = {
+    planet: string;
+    internal: string;
+    geology: string;
+  };
+
+  interface SectionTitlesType {
+    overview: string;
+    structure: string;
+    geology: string;
+  }
+
+  const sectionTitles: SectionTitlesType = {
+    overview: 'planet',
+    structure: 'internal',
+    geology: 'planet',
+  };
+
+  const section: string = sectionTitles[sectionName as keyof SectionTitlesType];
+
   return (
     <PlanetContainer>
       <PlanetImage
-        planetImageUrl={planetImageUrl}
+        planetImageUrl={planetImageUrl[section as keyof PlanetUrlType]}
         planetName={planetName.toLowerCase()}
+      />
+      <HoverIcon
+        hoverImageUrl={planetImageUrl.geology}
+        isShown={sectionName === 'geology'}
       />
     </PlanetContainer>
   );
