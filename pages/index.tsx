@@ -61,8 +61,9 @@ export default function Home({ data }: PropTypes) {
         <SectionMenu sectionName={section} setSection={setSection} />
         <PlanetContainer>
           <Planet
-            planetImageUrl={data[planetPage].images.planet}
+            planetImageUrl={data[planetPage].images}
             planetName={data[planetPage].name}
+            sectionName={section}
           />
           <Information
             section={data[planetPage][section as keyof PlanetType]}
