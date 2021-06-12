@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
+import FocusTrap from 'focus-trap-react';
 
 const Navigation = styled.div`
   position: relative;
@@ -37,18 +38,7 @@ const Menu = styled.ul<{ isOpen: boolean }>`
 `;
 
 const MenuItem = styled.li`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   width: 100%;
-  font-family: ${props => props.theme.main.fonts.spartan};
-  font-weight: 700;
-  font-size: 15px;
-  line-height: 25px;
-  letter-spacing: 1.36px;
-  text-transform: uppercase;
-  color: ${props => props.theme.main.colors.mainText};
-  padding: 20px 0;
 
   &:not(:last-child) {
     border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
@@ -63,6 +53,34 @@ const ChevronContainer = styled.svg`
   margin-right: 8px;
 `;
 
+const HamburgerIconContainer = styled.button`
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+  /* &:focus {
+    outline: 1px solid #fff;
+  } */
+`;
+
+const MenuButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: transparent;
+  font-family: ${props => props.theme.main.fonts.spartan};
+  font-weight: 700;
+  font-size: 15px;
+  line-height: 25px;
+  letter-spacing: 1.36px;
+  text-transform: uppercase;
+  color: ${props => props.theme.main.colors.mainText};
+  padding: 20px 0;
+  width: 100%;
+`;
+
 const HamburgerIcon = ({
   setIsOpen,
   isOpen,
@@ -71,24 +89,34 @@ const HamburgerIcon = ({
   isOpen: boolean;
 }): JSX.Element => {
   return (
-    <svg
-      width='36'
-      height='36'
-      viewBox='0 0 36 36'
-      fill='none'
-      xmlns='http://www.w3.org/2000/svg'
+    <HamburgerIconContainer
+      title='Planet Menu'
       onClick={() => setIsOpen(!isOpen)}
     >
-      <rect x='6' y='9.5' width='24' height='3' fill='white' />
-      <rect x='6' y='16.5' width='24' height='3' fill='white' />
-      <rect x='6' y='23.5' width='24' height='3' fill='white' />
-    </svg>
+      <svg
+        width='36'
+        height='36'
+        viewBox='0 0 36 36'
+        fill='none'
+        xmlns='http://www.w3.org/2000/svg'
+      >
+        <title>Planet Menu Icon</title>
+        <rect x='6' y='9.5' width='24' height='3' fill='white' />
+        <rect x='6' y='16.5' width='24' height='3' fill='white' />
+        <rect x='6' y='23.5' width='24' height='3' fill='white' />
+      </svg>
+    </HamburgerIconContainer>
   );
 };
 
 const Chevron = (): JSX.Element => {
   return (
-    <ChevronContainer xmlns='http://www.w3.org/2000/svg' width='6' height='8'>
+    <ChevronContainer
+      xmlns='http://www.w3.org/2000/svg'
+      width='6'
+      height='8'
+      aria-hidden='true'
+    >
       <path fill='none' stroke='#FFF' opacity='.4' d='M1 0l4 4-4 4' />
     </ChevronContainer>
   );
@@ -144,31 +172,58 @@ export default function Header({
     },
   ];
 
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          setIsOpen(false);
+        }
+      });
+    } else {
+      document.removeEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          setIsOpen(false);
+        }
+      });
+    }
+
+    return () => {
+      document.removeEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          setIsOpen(false);
+        }
+      });
+    };
+  });
+
   return (
     <header>
       <Navigation>
         <SiteName>THE PLANETS</SiteName>
         <HamburgerIcon setIsOpen={setIsOpen} isOpen={isOpen} />
       </Navigation>
-      <Menu isOpen={isOpen}>
-        {planets.map((planet, index) => {
-          return (
-            <MenuItem
-              key={planet.name}
-              onClick={() => {
-                setPlanetPage(index);
-                setIsOpen(false);
-              }}
-            >
-              <PlanetNameContainer>
-                <PlanetCircle bgColor={planet.color} />
-                {planet.name}
-              </PlanetNameContainer>
-              <Chevron />
-            </MenuItem>
-          );
-        })}
-      </Menu>
+      <FocusTrap active={isOpen}>
+        <Menu isOpen={isOpen} aria-label='Planet Menu'>
+          {planets.map((planet, index) => {
+            return (
+              <MenuItem key={planet.name}>
+                <MenuButton
+                  onClick={() => {
+                    setPlanetPage(index);
+                    setIsOpen(false);
+                  }}
+                >
+                  <PlanetNameContainer>
+                    <PlanetCircle bgColor={planet.color} />
+                    {planet.name}
+                  </PlanetNameContainer>
+                  <Chevron />
+                </MenuButton>
+              </MenuItem>
+            );
+          })}
+        </Menu>
+      </FocusTrap>
     </header>
   );
 }
