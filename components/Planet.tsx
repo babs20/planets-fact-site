@@ -20,7 +20,7 @@ const PlanetImage = styled.div<PlanetImageProps>`
   background-position: center;
   background-size: cover;
 
-  @media ${device.tabletL} {
+  @media ${device.tablet} {
     ${({ theme, planetName }) =>
       theme.main.planetDimensions[planetName as keyof PlanetObjType].desktop}
   }
@@ -33,6 +33,10 @@ const PlanetContainer = styled.div`
   justify-content: center;
   height: 304px;
   width: 100%;
+
+  @media ${device.tablet} {
+    height: 460px;
+  }
 `;
 
 const HoverIcon = styled.div<{ hoverImageUrl: string; isShown: boolean }>`
@@ -44,7 +48,13 @@ const HoverIcon = styled.div<{ hoverImageUrl: string; isShown: boolean }>`
   background-size: cover;
   width: 100px;
   height: 122px;
-  top: 144px;
+  bottom: 32px;
+
+  @media ${device.tablet} {
+    bottom: 64px;
+    width: 125px;
+    height: 152px;
+  }
 `;
 
 export const Planet = ({
@@ -81,7 +91,7 @@ export const Planet = ({
   const section: string = sectionTitles[sectionName as keyof SectionTitlesType];
 
   return (
-    <PlanetContainer>
+    <PlanetContainer id='planet'>
       <PlanetImage
         planetImageUrl={planetImageUrl[section as keyof PlanetUrlType]}
         planetName={planetName.toLowerCase()}

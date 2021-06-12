@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
 import FocusTrap from 'focus-trap-react';
+import device from '../styles/breakpoints';
 
 const Navigation = styled.div`
   position: relative;
@@ -9,6 +10,12 @@ const Navigation = styled.div`
   align-items: center;
   padding: 16px 24px;
   border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+
+  @media ${device.tablet} {
+    justify-content: center;
+    padding: 32px 0 0 0;
+    border: none;
+  }
 `;
 
 const SiteName = styled.h1`
@@ -18,23 +25,36 @@ const SiteName = styled.h1`
   color: ${props => props.theme.main.colors.mainText};
 `;
 
-const PlanetCircle = styled.div<{ bgColor: string }>`
-  height: 20px;
-  width: 20px;
-  border-radius: 20px;
-  background-color: ${({ bgColor }) => bgColor};
-  margin-right: 24px;
+const HamburgerIconContainer = styled.button`
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+
+  @media ${device.tablet} {
+    display: none;
+  }
 `;
 
 const Menu = styled.ul<{ isOpen: boolean }>`
   position: absolute;
+  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   z-index: 1;
   width: 100%;
   height: 100%;
   overflow-y: hidden;
   padding: 24px 24px;
-  display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   background-color: ${props => props.theme.main.colors['blue-900']};
+
+  @media ${device.tablet} {
+    display: flex;
+    position: static;
+    padding: 40px 40px 28px 40px;
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+    align-items: center;
+    justify-content: space-between;
+  }
 `;
 
 const MenuItem = styled.li`
@@ -43,26 +63,13 @@ const MenuItem = styled.li`
   &:not(:last-child) {
     border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
   }
-`;
 
-const PlanetNameContainer = styled.div`
-  display: flex;
-`;
-
-const ChevronContainer = styled.svg`
-  margin-right: 8px;
-`;
-
-const HamburgerIconContainer = styled.button`
-  background-color: transparent;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-
-  /* &:focus {
-    outline: 1px solid #fff;
-  } */
+  @media ${device.tablet} {
+    &:not(:last-child) {
+      border-bottom: none;
+    }
+    width: min-content;
+  }
 `;
 
 const MenuButton = styled.button`
@@ -79,6 +86,42 @@ const MenuButton = styled.button`
   color: ${props => props.theme.main.colors.mainText};
   padding: 20px 0;
   width: 100%;
+
+  @media ${device.tablet} {
+    font-size: 11px;
+    letter-spacing: 1px;
+    width: min-content;
+    padding: 0 8px;
+  }
+`;
+
+const PlanetNameContainer = styled.div`
+  display: flex;
+
+  @media ${device.tablet} {
+    width: 100%;
+    justify-content: center;
+  }
+`;
+
+const PlanetCircle = styled.div<{ bgColor: string }>`
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+  background-color: ${({ bgColor }) => bgColor};
+  margin-right: 24px;
+
+  @media ${device.tablet} {
+    display: none;
+  }
+`;
+
+const ChevronContainer = styled.svg`
+  margin-right: 8px;
+
+  @media ${device.tablet} {
+    display: none;
+  }
 `;
 
 const HamburgerIcon = ({
@@ -132,9 +175,27 @@ export default function Header({
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add('menu-open');
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          setIsOpen(false);
+        }
+      });
     } else {
       document.body.classList.remove('menu-open');
+      document.removeEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          setIsOpen(false);
+        }
+      });
     }
+
+    return () => {
+      document.removeEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          setIsOpen(false);
+        }
+      });
+    };
   }, [isOpen]);
 
   const planets = [
@@ -171,30 +232,6 @@ export default function Header({
       color: '#497EFA',
     },
   ];
-
-  useEffect(() => {
-    if (isOpen) {
-      document.addEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-          setIsOpen(false);
-        }
-      });
-    } else {
-      document.removeEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-          setIsOpen(false);
-        }
-      });
-    }
-
-    return () => {
-      document.removeEventListener('keydown', e => {
-        if (e.key === 'Escape') {
-          setIsOpen(false);
-        }
-      });
-    };
-  });
 
   return (
     <header>

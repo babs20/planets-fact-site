@@ -38,7 +38,7 @@ const mainTheme: DefaultTheme = {
         font-weight: 500;
         font-size: 40px;
         line-height: 52px;
-        letter-spacing: -1.5px;
+        letter-spacing: -1.05px;
         text-transform: uppercase;
       `,
       'text-h3': css`
