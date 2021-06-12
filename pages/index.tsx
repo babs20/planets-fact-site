@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import data from '../data/data.json';
 import { GetStaticProps } from 'next';
 import { useState } from 'react';
+import device from '../styles/breakpoints';
 
 interface PropTypes {
   data: {
@@ -48,6 +49,35 @@ const PlanetContainer = styled.main`
   align-items: center;
   justify-content: space-around;
   padding: 0 24px;
+
+  @media ${device.tablet} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: min-content min-content min-content;
+    padding: 0 40px 36px 40px;
+
+    #planet {
+      grid-column: 1/3;
+      grid-row: 1;
+    }
+    #facts {
+      grid-column: 1/3;
+      grid-row: 3;
+    }
+  }
+`;
+
+const MobileSectionContainer = styled.div`
+  @media ${device.tablet} {
+    display: none;
+  }
+`;
+
+const TabletSectionContainer = styled.div`
+  display: none;
+  @media ${device.tablet} {
+    display: block;
+  }
 `;
 
 export default function Home({ data }: PropTypes) {
@@ -58,7 +88,9 @@ export default function Home({ data }: PropTypes) {
     <>
       <Header setPlanetPage={setPlanetPage} />
       <main>
-        <SectionMenu sectionName={section} setSection={setSection} />
+        <MobileSectionContainer>
+          <SectionMenu sectionName={section} setSection={setSection} />
+        </MobileSectionContainer>
         <PlanetContainer>
           <Planet
             planetImageUrl={data[planetPage].images}
@@ -69,6 +101,9 @@ export default function Home({ data }: PropTypes) {
             section={data[planetPage][section as keyof PlanetType]}
             name={data[planetPage].name}
           />
+          <TabletSectionContainer>
+            <SectionMenu sectionName={section} setSection={setSection} />
+          </TabletSectionContainer>
           <Facts
             rotation={data[planetPage].rotation}
             revolution={data[planetPage].revolution}

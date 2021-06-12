@@ -1,9 +1,15 @@
 import styled from 'styled-components';
+import device from '../styles/breakpoints';
 
 const InfoSection = styled.section`
   color: ${props => props.theme.main.colors.mainText};
   text-align: center;
   margin-bottom: 28px;
+
+  @media ${device.tablet} {
+    text-align: start;
+    margin-bottom: 0;
+  }
 `;
 
 const PlanetName = styled.h1`
