@@ -42,18 +42,42 @@ const Section = styled.li<{
   planetName: string;
   isSelected: boolean;
 }>`
+  position: relative;
   text-align: center;
   opacity: 0.5;
-  &:nth-child(${props => props.sectionId}) {
-    opacity: 1;
-    border-bottom: 4px solid
-      ${({ theme, planetName }) =>
-        theme.main.colors[planetName as keyof ColorsType]};
+
+  transition: background-color 200ms ease-out;
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 4px;
   }
+
+  ${({ isSelected, theme, planetName }) =>
+    isSelected &&
+    css`
+      &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        height: 4px;
+        width: 100%;
+        background-color: ${theme.main.colors[planetName as keyof ColorsType]};
+        transition: width 300ms ease-out;
+      }
+      opacity: 1;
+    `}
 
   @media ${device.tablet} {
     width: 280px;
     border: 1px solid #fff;
+
+    &:before {
+      all: unset;
+    }
 
     &:not(:first-child) {
       margin-top: 24px;
