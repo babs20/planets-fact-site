@@ -43,7 +43,7 @@ type PlanetType = {
   };
 };
 
-const PlanetContainer = styled.main`
+const PlanetContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,26 +51,12 @@ const PlanetContainer = styled.main`
   padding: 0 24px;
 
   @media ${device.tablet} {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: min-content min-content min-content;
     padding: 0 40px 36px 40px;
-
-    #planet {
-      grid-column: 1/3;
-      grid-row: 1;
-    }
-    #facts {
-      grid-column: 1/3;
-      grid-row: 3;
-    }
   }
 
   @media ${device.desktop} {
-    #planet {
-      grid-column: 1;
-      grid-row: 1/3;
-    }
+    padding: 0 165px;
+    margin: 0 auto;
   }
 `;
 
@@ -84,6 +70,15 @@ const TabletSectionContainer = styled.div`
   display: none;
   @media ${device.tablet} {
     display: block;
+  }
+`;
+
+const InfoContainer = styled.div`
+  @media ${device.tablet} {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
   }
 `;
 
@@ -103,22 +98,27 @@ export default function Home({ data }: PropTypes) {
           />
         </MobileSectionContainer>
         <PlanetContainer>
-          <Planet
-            planetImageUrl={data[planetPage].images}
-            planetName={data[planetPage].name}
-            sectionName={section}
-          />
-          <Information
-            section={data[planetPage][section as keyof PlanetType]}
-            name={data[planetPage].name}
-          />
-          <TabletSectionContainer>
-            <SectionMenu
-              sectionName={section}
-              setSection={setSection}
+          <div>
+            <Planet
+              planetImageUrl={data[planetPage].images}
               planetName={data[planetPage].name}
+              sectionName={section}
             />
-          </TabletSectionContainer>
+            <InfoContainer>
+              <Information
+                section={data[planetPage][section as keyof PlanetType]}
+                name={data[planetPage].name}
+              />
+              <TabletSectionContainer>
+                <SectionMenu
+                  sectionName={section}
+                  setSection={setSection}
+                  planetName={data[planetPage].name}
+                />
+              </TabletSectionContainer>
+            </InfoContainer>
+          </div>
+
           <Facts
             rotation={data[planetPage].rotation}
             revolution={data[planetPage].revolution}
