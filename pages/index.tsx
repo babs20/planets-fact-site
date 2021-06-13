@@ -54,6 +54,11 @@ const PlanetContainer = styled.div`
     padding: 0 40px 36px 40px;
   }
 
+  @media ${device.laptop} {
+    padding: 0 64px;
+    margin: 0 auto;
+  }
+
   @media ${device.desktop} {
     padding: 0 165px;
     margin: 0 auto;
@@ -80,6 +85,22 @@ const InfoContainer = styled.div`
     width: 100%;
     align-items: center;
   }
+
+  @media ${device.laptop} {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 350px;
+  }
+`;
+
+const DesktopTopContainer = styled.div`
+  @media ${device.laptop} {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
 `;
 
 export default function Home({ data }: PropTypes) {
@@ -98,7 +119,7 @@ export default function Home({ data }: PropTypes) {
           />
         </MobileSectionContainer>
         <PlanetContainer>
-          <div>
+          <DesktopTopContainer>
             <Planet
               planetImageUrl={data[planetPage].images}
               planetName={data[planetPage].name}
@@ -117,7 +138,7 @@ export default function Home({ data }: PropTypes) {
                 />
               </TabletSectionContainer>
             </InfoContainer>
-          </div>
+          </DesktopTopContainer>
 
           <Facts
             rotation={data[planetPage].rotation}
