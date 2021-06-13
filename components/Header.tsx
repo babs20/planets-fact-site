@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { useState, useEffect } from 'react';
-import FocusTrap from 'focus-trap-react';
 import device from '../styles/breakpoints';
 
 type ColorsType = {
@@ -303,30 +302,28 @@ export default function Header({
         <SiteName>THE PLANETS</SiteName>
         <HamburgerIcon setIsOpen={setIsOpen} isOpen={isOpen} />
       </Navigation>
-      <FocusTrap active={isOpen}>
-        <Menu isOpen={isOpen} aria-label='Planet Menu'>
-          {planets.map((planet, index) => {
-            return (
-              <MenuItem key={planet.name}>
-                <MenuButton
-                  isSelected={planet.name === planets[planetPage].name}
-                  planetName={planet.name.toLowerCase()}
-                  onClick={() => {
-                    setPlanetPage(index);
-                    setIsOpen(false);
-                  }}
-                >
-                  <PlanetNameContainer>
-                    <PlanetCircle bgColor={planet.color} />
-                    {planet.name}
-                  </PlanetNameContainer>
-                  <Chevron />
-                </MenuButton>
-              </MenuItem>
-            );
-          })}
-        </Menu>
-      </FocusTrap>
+      <Menu isOpen={isOpen} aria-label='Planet Menu'>
+        {planets.map((planet, index) => {
+          return (
+            <MenuItem key={planet.name}>
+              <MenuButton
+                isSelected={planet.name === planets[planetPage].name}
+                planetName={planet.name.toLowerCase()}
+                onClick={() => {
+                  setPlanetPage(index);
+                  setIsOpen(false);
+                }}
+              >
+                <PlanetNameContainer>
+                  <PlanetCircle bgColor={planet.color} />
+                  {planet.name}
+                </PlanetNameContainer>
+                <Chevron />
+              </MenuButton>
+            </MenuItem>
+          );
+        })}
+      </Menu>
     </TopNavContainer>
   );
 }
