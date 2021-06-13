@@ -65,6 +65,13 @@ const PlanetContainer = styled.main`
       grid-row: 3;
     }
   }
+
+  @media ${device.desktop} {
+    #planet {
+      grid-column: 1;
+      grid-row: 1/3;
+    }
+  }
 `;
 
 const MobileSectionContainer = styled.div`
@@ -86,10 +93,14 @@ export default function Home({ data }: PropTypes) {
 
   return (
     <>
-      <Header setPlanetPage={setPlanetPage} />
+      <Header setPlanetPage={setPlanetPage} planetPage={planetPage} />
       <main>
         <MobileSectionContainer>
-          <SectionMenu sectionName={section} setSection={setSection} />
+          <SectionMenu
+            sectionName={section}
+            setSection={setSection}
+            planetName={data[planetPage].name}
+          />
         </MobileSectionContainer>
         <PlanetContainer>
           <Planet
@@ -102,7 +113,11 @@ export default function Home({ data }: PropTypes) {
             name={data[planetPage].name}
           />
           <TabletSectionContainer>
-            <SectionMenu sectionName={section} setSection={setSection} />
+            <SectionMenu
+              sectionName={section}
+              setSection={setSection}
+              planetName={data[planetPage].name}
+            />
           </TabletSectionContainer>
           <Facts
             rotation={data[planetPage].rotation}
