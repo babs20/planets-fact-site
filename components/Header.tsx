@@ -3,6 +3,32 @@ import { useState, useEffect } from 'react';
 import FocusTrap from 'focus-trap-react';
 import device from '../styles/breakpoints';
 
+type ColorsType = {
+  mainText: string;
+  'blue-900': string;
+  'blue-500': string;
+  'blue-100': string;
+  mercury: string;
+  venus: string;
+  earth: string;
+  mars: string;
+  jupiter: string;
+  saturn: string;
+  neptune: string;
+  uranus: string;
+};
+
+const TopNavContainer = styled.header`
+  @media ${device.desktop} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+    height: 85px;
+    padding: 0 32px;
+  }
+`;
+
 const Navigation = styled.div`
   position: relative;
   display: flex;
@@ -16,6 +42,10 @@ const Navigation = styled.div`
     padding: 32px 0 0 0;
     border: none;
   }
+
+  @media ${device.desktop} {
+    padding: 0;
+  }
 `;
 
 const SiteName = styled.h1`
@@ -23,6 +53,7 @@ const SiteName = styled.h1`
   font-size: 28px;
   line-height: 36px;
   color: ${props => props.theme.main.colors.mainText};
+  white-space: nowrap;
 `;
 
 const HamburgerIconContainer = styled.button`
@@ -55,6 +86,13 @@ const Menu = styled.ul<{ isOpen: boolean }>`
     align-items: center;
     justify-content: space-between;
   }
+
+  @media ${device.desktop} {
+    border-bottom: none;
+    padding: 0;
+    height: 100%;
+    justify-content: flex-end;
+  }
 `;
 
 const MenuItem = styled.li`
@@ -70,9 +108,17 @@ const MenuItem = styled.li`
     }
     width: min-content;
   }
+
+  @media ${device.desktop} {
+    height: 100%;
+
+    &:not(:first-child) {
+      margin-left: 32px;
+    }
+  }
 `;
 
-const MenuButton = styled.button`
+const MenuButton = styled.button<{ isSelected: boolean; planetName: string }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -86,12 +132,24 @@ const MenuButton = styled.button`
   color: ${props => props.theme.main.colors.mainText};
   padding: 20px 0;
   width: 100%;
+  cursor: pointer;
 
   @media ${device.tablet} {
     font-size: 11px;
     letter-spacing: 1px;
     width: min-content;
     padding: 0 8px;
+    opacity: ${({ isSelected }) => (isSelected ? 1 : 0.5)};
+  }
+
+  @media ${device.desktop} {
+    border-top: ${({ isSelected, theme, planetName }) =>
+      isSelected
+        ? `4px solid ${theme.main.colors[planetName as keyof ColorsType]}`
+        : '4px solid transparent'};
+    padding: 29px 0 27px 0;
+    height: 100%;
+    width: 100%;
   }
 `;
 
@@ -167,8 +225,10 @@ const Chevron = (): JSX.Element => {
 
 export default function Header({
   setPlanetPage,
+  planetPage,
 }: {
   setPlanetPage: React.Dispatch<React.SetStateAction<number>>;
+  planetPage: number;
 }): JSX.Element {
   const [isOpen, setIsOpen] = useState<boolean>(false);
 
@@ -234,7 +294,7 @@ export default function Header({
   ];
 
   return (
-    <header>
+    <TopNavContainer>
       <Navigation>
         <SiteName>THE PLANETS</SiteName>
         <HamburgerIcon setIsOpen={setIsOpen} isOpen={isOpen} />
@@ -245,6 +305,8 @@ export default function Header({
             return (
               <MenuItem key={planet.name}>
                 <MenuButton
+                  isSelected={planet.name === planets[planetPage].name}
+                  planetName={planet.name.toLowerCase()}
                   onClick={() => {
                     setPlanetPage(index);
                     setIsOpen(false);
@@ -261,6 +323,6 @@ export default function Header({
           })}
         </Menu>
       </FocusTrap>
-    </header>
+    </TopNavContainer>
   );
 }
