@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import device from '../styles/breakpoints';
 
 type ColorsType = {
@@ -31,9 +31,17 @@ const Menu = styled.ul`
     align-items: flex-end;
     margin-left: 70px;
   }
+
+  @media ${device.laptop} {
+    margin: 40px 0 0 0;
+  }
 `;
 
-const Section = styled.li<{ sectionId: number; planetName: string }>`
+const Section = styled.li<{
+  sectionId: number;
+  planetName: string;
+  isSelected: boolean;
+}>`
   text-align: center;
   opacity: 0.5;
   &:nth-child(${props => props.sectionId}) {
@@ -60,11 +68,16 @@ const Section = styled.li<{ sectionId: number; planetName: string }>`
   }
 
   @media ${device.laptop} {
-    &:hover {
-      background: hsla(0, 0%, 85%, 0.2);
-      opacity: 1;
-      border: 1px solid transparent;
-    }
+    width: 350px;
+    ${({ isSelected }) =>
+      !isSelected &&
+      css`
+        &:hover {
+          background: hsla(0, 0%, 85%, 0.2);
+          opacity: 1;
+          border: 1px solid transparent;
+        }
+      `}
   }
 `;
 
@@ -92,6 +105,11 @@ const LargeMenuButton = styled.button`
     &:focus {
       outline-offset: 3px;
     }
+  }
+
+  @media ${device.laptop} {
+    font-size: 12px;
+    letter-spacing: 2.57px;
   }
 `;
 
@@ -137,6 +155,7 @@ export const SectionMenu = ({
         <Section
           sectionId={sectionTitles[sectionName as keyof SectionTitlesType]}
           planetName={planetName.toLowerCase()}
+          isSelected={sectionName === 'overview'}
         >
           <LargeMenuButton onClick={() => setSection('overview')}>
             <span>01</span>
@@ -149,6 +168,7 @@ export const SectionMenu = ({
         <Section
           sectionId={sectionTitles[sectionName as keyof SectionTitlesType]}
           planetName={planetName.toLowerCase()}
+          isSelected={sectionName === 'structure'}
         >
           <LargeMenuButton onClick={() => setSection('structure')}>
             <span>02</span>
@@ -161,6 +181,7 @@ export const SectionMenu = ({
         <Section
           sectionId={sectionTitles[sectionName as keyof SectionTitlesType]}
           planetName={planetName.toLowerCase()}
+          isSelected={sectionName === 'geology'}
         >
           <LargeMenuButton onClick={() => setSection('geology')}>
             <span>03</span>
