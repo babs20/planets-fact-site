@@ -29,7 +29,7 @@ const mainTheme: DefaultTheme = {
         font-family: ${fonts.antonio};
         font-size: 80px;
         line-height: 104px;
-        font-weight: 500;
+        font-weight: 400;
         text-transform: uppercase;
       `,
       'text-h2': css`
@@ -79,9 +79,13 @@ const mainTheme: DefaultTheme = {
           height: 111px;
           width: 111px;
         `,
-        desktop: css`
+        tablet: css`
           height: 184px;
           width: 184px;
+        `,
+        desktop: css`
+          height: 290px;
+          width: 290px;
         `,
       },
       venus: {
@@ -89,9 +93,13 @@ const mainTheme: DefaultTheme = {
           height: 154px;
           width: 154px;
         `,
-        desktop: css`
+        tablet: css`
           height: 253px;
           width: 253px;
+        `,
+        desktop: css`
+          height: 400px;
+          width: 400px;
         `,
       },
       earth: {
@@ -99,9 +107,13 @@ const mainTheme: DefaultTheme = {
           height: 173px;
           width: 173px;
         `,
-        desktop: css`
+        tablet: css`
           height: 285px;
           width: 285px;
+        `,
+        desktop: css`
+          height: 450px;
+          width: 450px;
         `,
       },
       mars: {
@@ -109,9 +121,13 @@ const mainTheme: DefaultTheme = {
           height: 129px;
           width: 129px;
         `,
-        desktop: css`
+        tablet: css`
           height: 213px;
           width: 213px;
+        `,
+        desktop: css`
+          height: 336px;
+          width: 336px;
         `,
       },
       jupiter: {
@@ -119,9 +135,13 @@ const mainTheme: DefaultTheme = {
           height: 224px;
           width: 224px;
         `,
-        desktop: css`
+        tablet: css`
           height: 369px;
           width: 369px;
+        `,
+        desktop: css`
+          height: 582px;
+          width: 582px;
         `,
       },
       saturn: {
@@ -129,9 +149,13 @@ const mainTheme: DefaultTheme = {
           height: 256px;
           width: 256px;
         `,
-        desktop: css`
+        tablet: css`
           height: 422px;
           width: 422px;
+        `,
+        desktop: css`
+          height: 666px;
+          width: 666px;
         `,
       },
       uranus: {
@@ -139,9 +163,13 @@ const mainTheme: DefaultTheme = {
           height: 176px;
           width: 176px;
         `,
-        desktop: css`
+        tablet: css`
           height: 290px;
           width: 290px;
+        `,
+        desktop: css`
+          height: 458px;
+          width: 458px;
         `,
       },
       neptune: {
@@ -149,9 +177,13 @@ const mainTheme: DefaultTheme = {
           height: 173px;
           width: 173px;
         `,
-        desktop: css`
+        tablet: css`
           height: 285px;
           width: 285px;
+        `,
+        desktop: css`
+          height: 450px;
+          width: 450px;
         `,
       },
     },

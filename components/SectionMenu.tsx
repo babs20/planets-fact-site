@@ -1,5 +1,20 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import device from '../styles/breakpoints';
+
+type ColorsType = {
+  mainText: string;
+  'blue-900': string;
+  'blue-500': string;
+  'blue-100': string;
+  mercury: string;
+  venus: string;
+  earth: string;
+  mars: string;
+  jupiter: string;
+  saturn: string;
+  neptune: string;
+  uranus: string;
+};
 
 const Menu = styled.ul`
   display: flex;
@@ -14,15 +29,26 @@ const Menu = styled.ul`
     height: max-content;
     padding: 0;
     align-items: flex-end;
+    margin-left: 70px;
+  }
+
+  @media ${device.laptop} {
+    margin: 40px 0 0 0;
   }
 `;
 
-const Section = styled.li<{ sectionId: number }>`
+const Section = styled.li<{
+  sectionId: number;
+  planetName: string;
+  isSelected: boolean;
+}>`
   text-align: center;
   opacity: 0.5;
   &:nth-child(${props => props.sectionId}) {
     opacity: 1;
-    border-bottom: 4px solid ${props => props.theme.main.colors.mercury};
+    border-bottom: 4px solid
+      ${({ theme, planetName }) =>
+        theme.main.colors[planetName as keyof ColorsType]};
   }
 
   @media ${device.tablet} {
@@ -36,12 +62,26 @@ const Section = styled.li<{ sectionId: number }>`
     &:nth-child(${props => props.sectionId}) {
       opacity: 1;
       border: 1px solid transparent;
-      background-color: ${props => props.theme.main.colors.mercury};
+      background-color: ${({ theme, planetName }) =>
+        theme.main.colors[planetName as keyof ColorsType]};
     }
+  }
+
+  @media ${device.laptop} {
+    width: 350px;
+    ${({ isSelected }) =>
+      !isSelected &&
+      css`
+        &:hover {
+          background: hsla(0, 0%, 85%, 0.2);
+          opacity: 1;
+          border: 1px solid transparent;
+        }
+      `}
   }
 `;
 
-const LongSectionName = styled.button`
+const LargeMenuButton = styled.button`
   display: none;
 
   @media ${device.tablet} {
@@ -55,15 +95,25 @@ const LongSectionName = styled.button`
     padding: 8px 0 8px 20px;
     width: 100%;
     text-align: start;
+    cursor: pointer;
 
     span:first-child {
       margin-right: 16px;
       opacity: 0.5;
     }
+
+    &:focus {
+      outline-offset: 3px;
+    }
+  }
+
+  @media ${device.laptop} {
+    font-size: 12px;
+    letter-spacing: 2.57px;
   }
 `;
 
-const MenuButton = styled.button`
+const MobileMenuButton = styled.button`
   ${props => props.theme.main.typography['text-h3']};
   font-size: 9px;
   line-height: 10px;
@@ -81,9 +131,11 @@ const MenuButton = styled.button`
 export const SectionMenu = ({
   sectionName,
   setSection,
+  planetName,
 }: {
   sectionName: string;
   setSection: React.Dispatch<React.SetStateAction<string>>;
+  planetName: string;
 }): JSX.Element => {
   interface SectionTitlesType {
     overview: number;
@@ -102,34 +154,42 @@ export const SectionMenu = ({
       <Menu>
         <Section
           sectionId={sectionTitles[sectionName as keyof SectionTitlesType]}
+          planetName={planetName.toLowerCase()}
+          isSelected={sectionName === 'overview'}
         >
-          <LongSectionName onClick={() => setSection('overview')}>
+          <LargeMenuButton onClick={() => setSection('overview')}>
             <span>01</span>
             <span>Overview</span>
-          </LongSectionName>
-          <MenuButton onClick={() => setSection('overview')}>
+          </LargeMenuButton>
+          <MobileMenuButton onClick={() => setSection('overview')}>
             Overview
-          </MenuButton>
+          </MobileMenuButton>
         </Section>
         <Section
           sectionId={sectionTitles[sectionName as keyof SectionTitlesType]}
+          planetName={planetName.toLowerCase()}
+          isSelected={sectionName === 'structure'}
         >
-          <LongSectionName onClick={() => setSection('structure')}>
+          <LargeMenuButton onClick={() => setSection('structure')}>
             <span>02</span>
             <span>Internal Structure</span>
-          </LongSectionName>
-          <MenuButton onClick={() => setSection('structure')}>
+          </LargeMenuButton>
+          <MobileMenuButton onClick={() => setSection('structure')}>
             Structure
-          </MenuButton>
+          </MobileMenuButton>
         </Section>
         <Section
           sectionId={sectionTitles[sectionName as keyof SectionTitlesType]}
+          planetName={planetName.toLowerCase()}
+          isSelected={sectionName === 'geology'}
         >
-          <LongSectionName onClick={() => setSection('geology')}>
+          <LargeMenuButton onClick={() => setSection('geology')}>
             <span>03</span>
             <span>Surface Geology</span>
-          </LongSectionName>
-          <MenuButton onClick={() => setSection('geology')}>Surface</MenuButton>
+          </LargeMenuButton>
+          <MobileMenuButton onClick={() => setSection('geology')}>
+            Surface
+          </MobileMenuButton>
         </Section>
       </Menu>
     </nav>

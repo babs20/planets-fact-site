@@ -22,6 +22,11 @@ const PlanetImage = styled.div<PlanetImageProps>`
 
   @media ${device.tablet} {
     ${({ theme, planetName }) =>
+      theme.main.planetDimensions[planetName as keyof PlanetObjType].tablet}
+  }
+
+  @media ${device.laptop} {
+    ${({ theme, planetName }) =>
       theme.main.planetDimensions[planetName as keyof PlanetObjType].desktop}
   }
 `;
@@ -36,6 +41,10 @@ const PlanetContainer = styled.div`
 
   @media ${device.tablet} {
     height: 460px;
+  }
+  @media ${device.laptop} {
+    height: 754px;
+    width: 65%;
   }
 `;
 
@@ -54,6 +63,12 @@ const HoverIcon = styled.div<{ hoverImageUrl: string; isShown: boolean }>`
     bottom: 64px;
     width: 125px;
     height: 152px;
+  }
+
+  @media ${device.laptop} {
+    bottom: 90px;
+    width: 163px;
+    height: 199px;
   }
 `;
 

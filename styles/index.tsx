@@ -347,7 +347,7 @@ object {
   border-color: theme('borderColor.default', currentColor);
 }
 
-button:focus {
+button:focus-visible {
   outline: 1px solid #fff;
   outline: 5px auto -webkit-focus-ring-color;
 }

@@ -43,7 +43,7 @@ type PlanetType = {
   };
 };
 
-const PlanetContainer = styled.main`
+const PlanetContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -51,19 +51,17 @@ const PlanetContainer = styled.main`
   padding: 0 24px;
 
   @media ${device.tablet} {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: min-content min-content min-content;
     padding: 0 40px 36px 40px;
+  }
 
-    #planet {
-      grid-column: 1/3;
-      grid-row: 1;
-    }
-    #facts {
-      grid-column: 1/3;
-      grid-row: 3;
-    }
+  @media ${device.laptop} {
+    padding: 0 64px;
+    margin: 0 auto;
+  }
+
+  @media ${device.desktop} {
+    padding: 0 165px;
+    margin: 0 auto;
   }
 `;
 
@@ -80,30 +78,68 @@ const TabletSectionContainer = styled.div`
   }
 `;
 
+const InfoContainer = styled.div`
+  @media ${device.tablet} {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+  }
+
+  @media ${device.laptop} {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 350px;
+  }
+`;
+
+const DesktopTopContainer = styled.div`
+  @media ${device.laptop} {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+`;
+
 export default function Home({ data }: PropTypes) {
   const [planetPage, setPlanetPage] = useState<number>(0);
   const [section, setSection] = useState<string>('overview');
 
   return (
     <>
-      <Header setPlanetPage={setPlanetPage} />
+      <Header setPlanetPage={setPlanetPage} planetPage={planetPage} />
       <main>
         <MobileSectionContainer>
-          <SectionMenu sectionName={section} setSection={setSection} />
+          <SectionMenu
+            sectionName={section}
+            setSection={setSection}
+            planetName={data[planetPage].name}
+          />
         </MobileSectionContainer>
         <PlanetContainer>
-          <Planet
-            planetImageUrl={data[planetPage].images}
-            planetName={data[planetPage].name}
-            sectionName={section}
-          />
-          <Information
-            section={data[planetPage][section as keyof PlanetType]}
-            name={data[planetPage].name}
-          />
-          <TabletSectionContainer>
-            <SectionMenu sectionName={section} setSection={setSection} />
-          </TabletSectionContainer>
+          <DesktopTopContainer>
+            <Planet
+              planetImageUrl={data[planetPage].images}
+              planetName={data[planetPage].name}
+              sectionName={section}
+            />
+            <InfoContainer>
+              <Information
+                section={data[planetPage][section as keyof PlanetType]}
+                name={data[planetPage].name}
+              />
+              <TabletSectionContainer>
+                <SectionMenu
+                  sectionName={section}
+                  setSection={setSection}
+                  planetName={data[planetPage].name}
+                />
+              </TabletSectionContainer>
+            </InfoContainer>
+          </DesktopTopContainer>
+
           <Facts
             rotation={data[planetPage].rotation}
             revolution={data[planetPage].revolution}
