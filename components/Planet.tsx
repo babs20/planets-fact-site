@@ -44,7 +44,7 @@ const PlanetContainer = styled.div`
   }
   @media ${device.laptop} {
     height: 754px;
-    width: 636px;
+    width: 65%;
   }
 `;
 
