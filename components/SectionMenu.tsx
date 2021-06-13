@@ -1,6 +1,21 @@
 import styled from 'styled-components';
 import device from '../styles/breakpoints';
 
+type ColorsType = {
+  mainText: string;
+  'blue-900': string;
+  'blue-500': string;
+  'blue-100': string;
+  mercury: string;
+  venus: string;
+  earth: string;
+  mars: string;
+  jupiter: string;
+  saturn: string;
+  neptune: string;
+  uranus: string;
+};
+
 const Menu = styled.ul`
   display: flex;
   justify-content: space-between;
@@ -17,12 +32,14 @@ const Menu = styled.ul`
   }
 `;
 
-const Section = styled.li<{ sectionId: number }>`
+const Section = styled.li<{ sectionId: number; planetName: string }>`
   text-align: center;
   opacity: 0.5;
   &:nth-child(${props => props.sectionId}) {
     opacity: 1;
-    border-bottom: 4px solid ${props => props.theme.main.colors.mercury};
+    border-bottom: 4px solid
+      ${({ theme, planetName }) =>
+        theme.main.colors[planetName as keyof ColorsType]};
   }
 
   @media ${device.tablet} {
@@ -36,7 +53,8 @@ const Section = styled.li<{ sectionId: number }>`
     &:nth-child(${props => props.sectionId}) {
       opacity: 1;
       border: 1px solid transparent;
-      background-color: ${props => props.theme.main.colors.mercury};
+      background-color: ${({ theme, planetName }) =>
+        theme.main.colors[planetName as keyof ColorsType]};
     }
   }
 `;
@@ -60,6 +78,10 @@ const LongSectionName = styled.button`
       margin-right: 16px;
       opacity: 0.5;
     }
+
+    &:focus {
+      outline-offset: 3px;
+    }
   }
 `;
 
@@ -81,9 +103,11 @@ const MenuButton = styled.button`
 export const SectionMenu = ({
   sectionName,
   setSection,
+  planetName,
 }: {
   sectionName: string;
   setSection: React.Dispatch<React.SetStateAction<string>>;
+  planetName: string;
 }): JSX.Element => {
   interface SectionTitlesType {
     overview: number;
@@ -102,6 +126,7 @@ export const SectionMenu = ({
       <Menu>
         <Section
           sectionId={sectionTitles[sectionName as keyof SectionTitlesType]}
+          planetName={planetName.toLowerCase()}
         >
           <LongSectionName onClick={() => setSection('overview')}>
             <span>01</span>
@@ -113,6 +138,7 @@ export const SectionMenu = ({
         </Section>
         <Section
           sectionId={sectionTitles[sectionName as keyof SectionTitlesType]}
+          planetName={planetName.toLowerCase()}
         >
           <LongSectionName onClick={() => setSection('structure')}>
             <span>02</span>
@@ -124,6 +150,7 @@ export const SectionMenu = ({
         </Section>
         <Section
           sectionId={sectionTitles[sectionName as keyof SectionTitlesType]}
+          planetName={planetName.toLowerCase()}
         >
           <LongSectionName onClick={() => setSection('geology')}>
             <span>03</span>
