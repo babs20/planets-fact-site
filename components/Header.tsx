@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { useState, useEffect } from 'react';
 import device from '../styles/breakpoints';
 
@@ -72,7 +72,7 @@ const Menu = styled.ul<{ isOpen: boolean }>`
   display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
   z-index: 1;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow-y: hidden;
   padding: 24px 24px;
   background-color: ${props => props.theme.main.colors['blue-900']};
@@ -95,6 +95,7 @@ const Menu = styled.ul<{ isOpen: boolean }>`
 `;
 
 const MenuItem = styled.li`
+  position: relative;
   width: 100%;
 
   &:not(:last-child) {
@@ -142,10 +143,6 @@ const MenuButton = styled.button<{ isSelected: boolean; planetName: string }>`
   }
 
   @media ${device.laptop} {
-    border-top: ${({ isSelected, theme, planetName }) =>
-      isSelected
-        ? `4px solid ${theme.main.colors[planetName as keyof ColorsType]}`
-        : '4px solid transparent'};
     padding: 29px 0 27px 0;
     height: 100%;
     width: 100%;
@@ -153,6 +150,30 @@ const MenuButton = styled.button<{ isSelected: boolean; planetName: string }>`
     &:hover {
       opacity: 1;
     }
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 0;
+      height: 4px;
+    }
+
+    ${({ isSelected, theme, planetName }) =>
+      isSelected &&
+      css`
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          height: 4px;
+          width: 100%;
+          background-color: ${theme.main.colors[
+            planetName as keyof ColorsType
+          ]};
+          transition: width 300ms ease-out;
+        }
+      `}
   }
 `;
 
@@ -195,7 +216,13 @@ const HamburgerIcon = ({
   return (
     <HamburgerIconContainer
       title='Planet Menu'
-      onClick={() => setIsOpen(!isOpen)}
+      onClick={() => {
+        setIsOpen(!isOpen);
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        });
+      }}
     >
       <svg
         width='36'
