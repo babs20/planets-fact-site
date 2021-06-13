@@ -10,12 +10,19 @@ const InfoSection = styled.section`
     text-align: start;
     margin-bottom: 0;
   }
+  @media ${device.desktop} {
+    margin-left: 15px;
+  }
 `;
 
 const PlanetName = styled.h1`
   ${props => props.theme.main.typography['text-h2']};
   letter-spacing: normal;
   margin-bottom: 16px;
+
+  @media ${device.laptop} {
+    ${props => props.theme.main.typography['text-h1']};
+  }
 `;
 
 const PlanetCopy = styled.p`
@@ -23,6 +30,10 @@ const PlanetCopy = styled.p`
   font-size: 11px;
   line-height: 22px;
   margin-bottom: 32px;
+
+  @media ${device.laptop} {
+    ${props => props.theme.main.typography['text-body']};
+  }
 `;
 
 const Cite = styled.cite`
@@ -32,6 +43,10 @@ const Cite = styled.cite`
   font-size: 12px;
   line-height: 25px;
   opacity: 0.5;
+
+  @media ${device.laptop} {
+    font-size: 14px;
+  }
 `;
 
 const InfoLink = styled.a`
