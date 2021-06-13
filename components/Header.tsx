@@ -150,6 +150,10 @@ const MenuButton = styled.button<{ isSelected: boolean; planetName: string }>`
     padding: 29px 0 27px 0;
     height: 100%;
     width: 100%;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 `;
 
