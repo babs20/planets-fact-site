@@ -8,7 +8,7 @@ import data from '../data/data.json';
 import { GetStaticProps } from 'next';
 import { useState } from 'react';
 import device from '../styles/breakpoints';
-
+import Head from 'next/head';
 interface PropTypes {
   data: {
     name: string;
@@ -106,9 +106,15 @@ const DesktopTopContainer = styled.div`
 export default function Home({ data }: PropTypes) {
   const [planetPage, setPlanetPage] = useState<number>(0);
   const [section, setSection] = useState<string>('overview');
+  const sectionTitle = section[0].toUpperCase() + section.slice(1);
 
   return (
     <>
+      <Head>
+        <title>
+          {data[planetPage].name} - {sectionTitle}
+        </title>
+      </Head>
       <Header setPlanetPage={setPlanetPage} planetPage={planetPage} />
       <main>
         <MobileSectionContainer>
