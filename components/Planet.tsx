@@ -22,6 +22,11 @@ const PlanetImage = styled.div<PlanetImageProps>`
 
   @media ${device.tablet} {
     ${({ theme, planetName }) =>
+      theme.main.planetDimensions[planetName as keyof PlanetObjType].tablet}
+  }
+
+  @media ${device.desktop} {
+    ${({ theme, planetName }) =>
       theme.main.planetDimensions[planetName as keyof PlanetObjType].desktop}
   }
 `;
@@ -36,6 +41,9 @@ const PlanetContainer = styled.div`
 
   @media ${device.tablet} {
     height: 460px;
+  }
+  @media ${device.tablet} {
+    height: 632px;
   }
 `;
 
