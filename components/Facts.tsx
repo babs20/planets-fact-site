@@ -24,7 +24,7 @@ const DefinitionContainer = styled.div`
   @media ${device.tablet} {
     flex-direction: column;
     align-items: flex-start;
-    min-width: 164px;
+    width: 100%;
     padding: 16px;
     flex-grow: 1;
     margin-bottom: 0;
