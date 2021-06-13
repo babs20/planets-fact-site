@@ -10,9 +10,6 @@ const InfoSection = styled.section`
     text-align: start;
     margin-bottom: 0;
   }
-  @media ${device.desktop} {
-    margin-left: 15px;
-  }
 `;
 
 const PlanetName = styled.h1`
@@ -22,6 +19,7 @@ const PlanetName = styled.h1`
 
   @media ${device.laptop} {
     ${props => props.theme.main.typography['text-h1']};
+    margin-bottom: 24px;
   }
 `;
 
@@ -33,6 +31,7 @@ const PlanetCopy = styled.p`
 
   @media ${device.laptop} {
     ${props => props.theme.main.typography['text-body']};
+    margin-bottom: 24px;
   }
 `;
 
