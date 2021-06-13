@@ -11,6 +11,10 @@ const FactSection = styled.dl`
     justify-content: space-between;
     margin: 28px 0 0 0;
   }
+
+  @media ${device.laptop} {
+    margin: 0;
+  }
 `;
 
 const DefinitionContainer = styled.div`
@@ -33,6 +37,14 @@ const DefinitionContainer = styled.div`
       margin-right: 11px;
     }
   }
+
+  @media ${device.laptop} {
+    padding: 24px 0 24px 24px;
+
+    &:not(:last-child) {
+      margin-right: 30px;
+    }
+  }
 `;
 
 const Term = styled.dt`
@@ -44,6 +56,13 @@ const Term = styled.dt`
   text-transform: uppercase;
   opacity: 0.5;
   margin-top: 4px;
+
+  @media ${device.laptop} {
+    font-size: 11px;
+    line-height: 25px;
+    letter-spacing: 1px;
+    margin: 0;
+  }
 `;
 
 const Definition = styled.dd`
@@ -58,6 +77,13 @@ const Definition = styled.dd`
     font-size: 24px;
     line-height: 31px;
     margin-top: 6px;
+  }
+
+  @media ${device.laptop} {
+    font-size: 40px;
+    line-height: 51.76px;
+    letter-spacing: -1.5px;
+    margin-top: 4px;
   }
 `;
 

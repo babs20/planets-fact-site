@@ -19,7 +19,7 @@ type ColorsType = {
 };
 
 const TopNavContainer = styled.header`
-  @media ${device.desktop} {
+  @media ${device.laptop} {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -43,7 +43,7 @@ const Navigation = styled.div`
     border: none;
   }
 
-  @media ${device.desktop} {
+  @media ${device.laptop} {
     padding: 0;
   }
 `;
@@ -87,7 +87,7 @@ const Menu = styled.ul<{ isOpen: boolean }>`
     justify-content: space-between;
   }
 
-  @media ${device.desktop} {
+  @media ${device.laptop} {
     border-bottom: none;
     padding: 0;
     height: 100%;
@@ -109,7 +109,7 @@ const MenuItem = styled.li`
     width: min-content;
   }
 
-  @media ${device.desktop} {
+  @media ${device.laptop} {
     height: 100%;
 
     &:not(:first-child) {
@@ -142,7 +142,7 @@ const MenuButton = styled.button<{ isSelected: boolean; planetName: string }>`
     opacity: ${({ isSelected }) => (isSelected ? 1 : 0.5)};
   }
 
-  @media ${device.desktop} {
+  @media ${device.laptop} {
     border-top: ${({ isSelected, theme, planetName }) =>
       isSelected
         ? `4px solid ${theme.main.colors[planetName as keyof ColorsType]}`
