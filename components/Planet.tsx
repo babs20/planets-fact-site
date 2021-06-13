@@ -42,8 +42,8 @@ const PlanetContainer = styled.div`
   @media ${device.tablet} {
     height: 460px;
   }
-  @media ${device.tablet} {
-    height: 632px;
+  @media ${device.desktop} {
+    height: 754px;
   }
 `;
 
