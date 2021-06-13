@@ -29,7 +29,7 @@ const mainTheme: DefaultTheme = {
         font-family: ${fonts.antonio};
         font-size: 80px;
         line-height: 104px;
-        font-weight: 500;
+        font-weight: 400;
         text-transform: uppercase;
       `,
       'text-h2': css`
