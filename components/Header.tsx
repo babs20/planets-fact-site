@@ -84,6 +84,7 @@ const Menu = styled.ul<{ isOpen: boolean }>`
     border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
     align-items: center;
     justify-content: space-between;
+    height: unset;
   }
 
   @media ${device.laptop} {
