@@ -187,7 +187,7 @@ const PlanetNameContainer = styled.span`
   }
 `;
 
-const PlanetCircle = styled.div<{ bgColor: string }>`
+const PlanetCircle = styled.span<{ bgColor: string }>`
   height: 20px;
   width: 20px;
   border-radius: 20px;
