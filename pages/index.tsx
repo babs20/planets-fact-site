@@ -104,7 +104,7 @@ const DesktopTopContainer = styled.div`
 `;
 
 export default function Home({ data }: PropTypes) {
-  const [planetPage, setPlanetPage] = useState<number>(0);
+  const [planetPage, setPlanetPage] = useState<number>(2);
   const [section, setSection] = useState<string>('overview');
   const sectionTitle = section[0].toUpperCase() + section.slice(1);
 
