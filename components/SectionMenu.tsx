@@ -146,6 +146,7 @@ const MobileMenuButton = styled.button`
   background-color: transparent;
   padding: 20px 0;
   width: 80px;
+  cursor: pointer;
 
   @media ${device.tablet} {
     display: none;
