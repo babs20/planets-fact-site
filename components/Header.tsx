@@ -35,6 +35,9 @@ const Navigation = styled.div`
   align-items: center;
   padding: 16px 24px;
   border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
+  @media ${device.desktop} {
+    height: 100%;
+  }
 
   @media ${device.tablet} {
     justify-content: center;
@@ -53,6 +56,11 @@ const SiteName = styled.span`
   line-height: 36px;
   color: ${props => props.theme.main.colors.mainText};
   white-space: nowrap;
+
+  @media ${device.desktop} {
+    height: 100%;
+    padding: 22px 0 27px 0;
+  }
 `;
 
 const HamburgerIconContainer = styled.button`
@@ -144,7 +152,7 @@ const MenuButton = styled.button<{ isSelected: boolean; planetName: string }>`
   }
 
   @media ${device.laptop} {
-    padding: 29px 0 27px 0;
+    padding: 33px 0 27px 0;
     height: 100%;
     width: 100%;
 
