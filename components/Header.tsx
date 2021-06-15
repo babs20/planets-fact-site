@@ -47,7 +47,7 @@ const Navigation = styled.div`
   }
 `;
 
-const SiteName = styled.h1`
+const SiteName = styled.span`
   ${props => props.theme.main.typography['text-h2']}
   font-size: 28px;
   line-height: 36px;
@@ -178,7 +178,7 @@ const MenuButton = styled.button<{ isSelected: boolean; planetName: string }>`
   }
 `;
 
-const PlanetNameContainer = styled.div`
+const PlanetNameContainer = styled.span`
   display: flex;
 
   @media ${device.tablet} {
@@ -330,7 +330,7 @@ export default function Header({
         <SiteName>THE PLANETS</SiteName>
         <HamburgerIcon setIsOpen={setIsOpen} isOpen={isOpen} />
       </Navigation>
-      <Menu isOpen={isOpen} aria-label='Planet Menu'>
+      <Menu isOpen={isOpen}>
         {planets.map((planet, index) => {
           return (
             <MenuItem key={planet.name}>
