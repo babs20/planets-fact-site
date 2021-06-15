@@ -35,7 +35,7 @@ const Navigation = styled.div`
   align-items: center;
   padding: 16px 24px;
   border-bottom: 1px solid hsla(0, 0%, 100%, 0.1);
-  @media ${device.desktop} {
+  @media ${device.laptop} {
     height: 100%;
   }
 
@@ -57,7 +57,7 @@ const SiteName = styled.span`
   color: ${props => props.theme.main.colors.mainText};
   white-space: nowrap;
 
-  @media ${device.desktop} {
+  @media ${device.laptop} {
     height: 100%;
     padding: 22px 0 27px 0;
   }
